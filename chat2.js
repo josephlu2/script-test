@@ -53,10 +53,8 @@
         e.zIndex = '9999'
         let i = document.createElement('button')
         i.setAttribute('id', 'chat-btn')
-        i.innerHTML =
-          "<img style='margin: 0 auto;' width='30px' height='30px' src='https://cdn.dialoqai.com/js/dialoq/images/chat.svg' />"
         let d = i.style
-        d.backgroundColor = '#4f46e5'
+        d.backgroundColor = '#7ba5ea'
         d.color = 'white'
         d.width = '50px'
         d.height = '50px'
