@@ -53,8 +53,20 @@
         e.zIndex = '9999'
         let i = document.createElement('button')
         i.setAttribute('id', 'chat-btn')
+        i.innerHTML =
+          "<img style='margin: 0 auto;' width='30px' height='30px' src='https://cdn.dialoqai.com/js/dialoq/images/chat.svg' />"
+        i.onclick = function () {
+          let t = document.querySelector('#dialoq')
+          'none' == t.style.display
+            ? ((t.style.display = 'block'),
+              (i.innerHTML =
+                "<img style='margin: 0 auto;' width='30px' height='30px' src='https://cdn.dialoqai.com/js/dialoq/images/close.svg' />"))
+            : ((t.style.display = 'none'),
+              (i.innerHTML =
+                "<img style='margin: 0 auto;' width='30px' height='30px' src='https://cdn.dialoqai.com/js/dialoq/images/chat.svg' />"))
+        }   
         let d = i.style
-        d.backgroundColor = '#7ba5ea'
+        d.backgroundColor = '#4f46e5'
         d.color = 'white'
         d.width = '50px'
         d.height = '50px'
@@ -70,8 +82,6 @@
         })
     window.addEventListener('message', function (t) {
       'closeIframe' === t.data &&
-        ((document.getElementById('dialoq').style.display = 'none'),
-        (document.getElementById('chat-btn').innerHTML =
-          "<img style='margin: 0 auto;' width='30px' height='30px' src='https://cdn.dialoqai.com/js/dialoq/images/chat.svg' />"))
+        ((document.getElementById('dialoq').style.display = 'none'))
     })
   })()
