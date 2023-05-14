@@ -36,8 +36,10 @@
             (o.borderRadius = '0'),
             (o.border = 0))
         i.appendChild(a)
-        let l = t.getAttribute('data-chatbot-id'),
-          r = `https://dialoqai.com/chatbot/${l}`
+        /* let l = t.getAttribute('data-chatbot-id'),
+          r = `https://dialoqai.com/chatbot/${l}` */
+          let l = t.getAttribute('data-chatbot-id'),
+          r = `http://localhost:3000/chat/645f0c178551cc33de9c993d`
         a.src = r
         document.body.appendChild(i)
       },
