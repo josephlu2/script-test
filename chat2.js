@@ -1,87 +1,84 @@
-(() => {
-    let t = document.currentScript,
-      e = () => {
-        let e = window.matchMedia('(min-width: 768px)'),
-          i = document.createElement('div')
-        i.setAttribute('id', 'dialoq')
-        let d = i.style
-        d.display = 'none'
-        d.boxSizing = 'border-box'
-        d.height = '80vh'
-        d.position = 'fixed'
-        d.bottom = '80px'
-        d.right = '20px'
-        d.zIndex = '9999'
-        let a = document.createElement('iframe'),
-          o = a.style
-        o.boxSizing = 'borderBox'
-        o.position = 'absolute'
-        o.right = 0
-        o.top = 0
-        o.width = '100%'
-        o.height = '100%'
-        o.border = 1
-        o.margin = 0
-        o.padding = 0
-        o.borderRadius = '10px'
-        o.backgroundColor = 'white'
-        o.borderWidth = '1px'
-        o.boxShadow = '3px 2px 9px 1px rgba(181,181,181,0.4)'
-        e.matches
-          ? (d.width = '400px')
-          : ((d.width = '100%'),
-            (d.bottom = '0'),
-            (d.right = '0'),
-            (d.height = '100%'),
-            (o.borderRadius = '0'),
-            (o.border = 0))
-        i.appendChild(a)
-        /* let l = t.getAttribute('data-chatbot-id'),
-          r = `https://dialoqai.com/chatbot/${l}` */
-          let l = t.getAttribute('data-chatbot-id'),
-          r = `http://localhost:3000/chat/645f0c178551cc33de9c993d`
-        a.src = r
-        document.body.appendChild(i)
-      },
-      i = () => {
-        let t = document.createElement('div'),
-          e = t.style
-        e.display = 'block'
-        e.position = 'fixed'
-        e.bottom = '20px'
-        e.right = '20px'
-        e.zIndex = '9999'
-        let i = document.createElement('button')
-        i.setAttribute('id', 'chat-btn')
-        i.innerHTML =
-          "<img style='margin: 0 auto;' width='30px' height='30px' src='https://cdn.dialoqai.com/js/dialoq/images/chat.svg' />"
-        i.onclick = function () {
-          let t = document.querySelector('#dialoq')
-          'none' == t.style.display
-            ? ((t.style.display = 'block'),
-              (i.innerHTML =
-                "<img style='margin: 0 auto;' width='30px' height='30px' src='https://cdn.dialoqai.com/js/dialoq/images/close.svg' />"))
-            : ((t.style.display = 'none'),
-              (i.innerHTML =
-                "<img style='margin: 0 auto;' width='30px' height='30px' src='https://cdn.dialoqai.com/js/dialoq/images/chat.svg' />"))
-        }   
-        let d = i.style
-        d.backgroundColor = '#4f46e5'
-        d.color = 'white'
-        d.width = '50px'
-        d.height = '50px'
-        d.borderRadius = '50%'
-        d.borderWidth = '0px'
-        t.appendChild(i)
-        document.body.appendChild(t)
-      }
-    'complete' === document.readyState
-      ? (i(), e())
-      : document.addEventListener('readystatechange', () => {
-          'complete' === document.readyState && (i(), e())
-        })
-    window.addEventListener('message', function (t) {
-      'closeIframe' === t.data &&
-        ((document.getElementById('dialoq').style.display = 'none'))
-    })
-  })()
+// Create image element for chat button
+const button = document.createElement("img");
+button.src = "https://icons-for-free.com/download-icon-chat+icon-1320184411998302345_512.png";
+button.alt = "Chat";
+button.style.position = "fixed";
+button.style.bottom = "20px";
+button.style.right = "20px";
+button.style.zIndex = "9999";
+button.style.width = "50px";
+button.style.height = "50px";
+button.addEventListener("click", showChat);
+
+// Append button to the body
+document.body.appendChild(button);
+
+// Show chat popup
+function showChat() {
+  // Create popup container
+  const popupContainer = document.createElement("div");
+  popupContainer.className = "chat-popup";
+  popupContainer.style.zIndex = "9999";
+
+  // Create iframe element
+  const iframe = document.createElement("iframe");
+  iframe.src = "https://weather.gov";
+  iframe.style.border = "none";
+  iframe.style.width = "100%";
+  iframe.style.height = "100%";
+  iframe.style.borderRadius = "10px";
+  iframe.style.backgroundColor = "white";
+  iframe.style.borderWidth = "1px";
+  iframe.style.boxShadow = "3px 2px 9px 1px rgba(181,181,181,0.4)";
+
+  // Append iframe to popup container
+  popupContainer.appendChild(iframe);
+
+  // Replace chat button with close button image
+  button.src = "https://img.uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/close-round-icon.png";
+  button.alt = "Close";
+  button.removeEventListener("click", showChat);
+  button.addEventListener("click", hideChat);
+
+  // Append popup container to body
+  document.body.appendChild(popupContainer);
+
+  // Hide chat popup
+  function hideChat() {
+    document.body.removeChild(popupContainer);
+    // Replace close button with chat button image
+    button.src = "https://icons-for-free.com/download-icon-chat+icon-1320184411998302345_512.png";
+    button.alt = "Chat";
+    button.removeEventListener("click", hideChat);
+    button.addEventListener("click", showChat);
+  }
+}
+
+// CSS styles for chat popup
+const styles = `
+.chat-popup {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 300px;
+  height: 400px;
+  background-color: white;
+  z-index: 9999;
+}
+
+.chat-popup button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+`;
+
+// Add CSS styles to head
+const styleSheet = document.createElement("style");
+styleSheet.type = "text/css";
+styleSheet.innerText = styles;
+document.head.appendChild(styleSheet);

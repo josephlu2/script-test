@@ -26,33 +26,19 @@ function showChat() {
   iframe.style.border = "none";
   iframe.style.width = "100%";
   iframe.style.height = "100%";
-  iframe.style.border = 1;
-  iframe.style.margin = 0;
-  iframe.style.borderRadius = '10px';
-  iframe.style.backgroundColor = 'white';
-  iframe.style.borderWidth = '1px';
-  iframe.style.boxShadow = '3px 2px 9px 1px rgba(181,181,181,0.4)'
-  iframe.style.paddingTop = "25px"
+  iframe.style.borderRadius = "10px";
+  iframe.style.backgroundColor = "white";
+  iframe.style.borderWidth = "1px";
+  iframe.style.boxShadow = "3px 2px 9px 1px rgba(181,181,181,0.4)";
 
   // Append iframe to popup container
   popupContainer.appendChild(iframe);
 
-  // Create close button element
-  const closeButton = document.createElement("button");
-  closeButton.innerText = "X";
-  closeButton.style.position = "absolute";
-  closeButton.style.top = "5px";
-  closeButton.style.right = "5px";
-  closeButton.style.padding = "5px";
-  closeButton.style.border = "none";
-  closeButton.style.backgroundColor = "transparent";
-  closeButton.style.cursor = "pointer";
-
-  // Add event listener to close button
-  closeButton.addEventListener("click", hideChat);
-
-  // Append close button to popup container
-  popupContainer.appendChild(closeButton);
+  // Replace chat button with close button image
+  button.src = "https://img.uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/close-round-icon.png";
+  button.alt = "Close";
+  button.removeEventListener("click", showChat);
+  button.addEventListener("click", hideChat);
 
   // Append popup container to body
   document.body.appendChild(popupContainer);
@@ -60,6 +46,11 @@ function showChat() {
   // Hide chat popup
   function hideChat() {
     document.body.removeChild(popupContainer);
+    // Replace close button with chat button image
+    button.src = "https://icons-for-free.com/download-icon-chat+icon-1320184411998302345_512.png";
+    button.alt = "Chat";
+    button.removeEventListener("click", hideChat);
+    button.addEventListener("click", showChat);
   }
 }
 
@@ -67,7 +58,7 @@ function showChat() {
 const styles = `
 .chat-popup {
   position: fixed;
-  bottom: 105px;
+  bottom: 80px;
   right: 20px;
   width: 300px;
   height: 400px;
